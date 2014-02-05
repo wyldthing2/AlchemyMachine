@@ -1,0 +1,472 @@
+//Ingredient input
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <fstream>
+using namespace std;
+
+#define wholelist "Abecean Longfin<>Weakness to Frost<>Fortify Sneak<>Weakness to Poison<>Fortify Restoration<>0.5<>15<>Lakes, rivers, streams, fish barrels<>Ancestor Moth Wing*<>Damage Stamina<>Fortify Conjuration<>Damage Magicka Regen<>Fortify Enchanting<>0.1<>2<>Ancestor Glade<>Ash Creep Cluster‡<>Damage Stamina<>Invisibility<>Resist Fire<>Fortify Destruction<>0.3<>20<>Harvested from ash covered areas of Solstheim<>Ash Hopper Jelly‡<>Restore Health<>Fortify Light Armor<>Resist Shock<>Weakness to Frost<>0.3<>20<>Ash Hopper Corpses<>Ashen Grass Pod‡<>Resist Fire<>Weakness to Shock<>Fortify Lockpicking<>Fortify Sneak<>0.1<>1<>Harvested from ash covered areas of Solstheim<>Bear Claws<>Restore Stamina<>Fortify Health<>Fortify One - Handed<>Damage Magicka Regen<>0.1<>2<>Bears<>Bee<>Restore Stamina<>Ravage Stamina<>Regenerate Stamina<>Weakness to Shock<>0.1<>3<>Beehive<>Beehive Husk<>Resist Poison<>Fortify Light Armor<>Fortify Sneak<>Fortify Destruction<>1<>5<>Beehive<>Berit's Ashes (Identical to Bone Meal)<>Damage Stamina<>Resist Fire<>Fortify Conjuration<>Ravage Stamina<>0.5<>5<>Quest item given by Thadgeir.<>Bleeding Crown<>Weakness to Fire<>Fortify Block<>Weakness to Poison<>Resist Magic<>0.3<>10<>Mushroom clusters<>Blisterwort<>Damage Stamina<>Frenzy<>Restore Health<>Fortify Smithing<>0.2<>12<>Caves and dark areas<>Blue Butterfly Wing<>Damage Stamina<>Fortify Conjuration<>Damage Magicka Regen<>Fortify Enchanting<>0.1<>2<>Blue Butterfly<>Blue Dartwing<>Resist Shock<>Fortify Pickpocket<>Restore Health<>Fear<>0.1<>1<>Hovering above water<>Blue Mountain Flower<>Restore Health<>Fortify Conjuration<>Fortify Health<>Damage Magicka Regen<>0.1<>2<>Mountain flower clumps<>Boar Tusk‡<>Fortify Stamina<>Fortify Health<>Fortify Block<>Frenzy<>0.5<>20<>Tusked Bristlebacks<>Bone Meal<>Damage Stamina<>Resist Fire<>Fortify Conjuration<>Ravage Stamina<>0.5<>5<>Draugr and skeletons<>Briar Heart<>Restore Magicka<>Fortify Block<>Paralysis<>Fortify Magicka<>0.5<>20<>Forsworn Leaders<>Burnt Spriggan Wood‡<>Weakness to Fire<>Fortify Alteration<>Damage Magicka Regen<>Slow<>0.5<>20<>Burnt Spriggans<>Butterfly Wing<>Restore Health<>Fortify Barter<>Lingering Damage Stamina<>Damage Magicka<>0.1<>3<>Monarch Butterfly<>Canis Root<>Damage Stamina<>Fortify One - Handed<>Fortify Marksman<>Paralysis<>0.1<>5<>Near rocky areas<>Charred Skeever Hide<>Restore Stamina<>Cure Disease<>Resist Poison<>Restore Health<>0.5<>1<>Found at campfires<>Chaurus Eggs<>Weakness to Poison<>Fortify Stamina<>Damage Magicka<>Invisibility<>0.2<>10<>Falmer caves<>Chaurus Hunter Antennae*<>Damage Stamina<>Fortify Conjuration<>Damage Magicka Regen<>Fortify Enchanting<>0.1<>2<>Chaurus Hunter Chaurus Hunter Fledgling<>Chicken's Egg<>Resist Magic<>Damage Magicka Regen<>Waterbreathing<>Lingering Damage Stamina<>0.5<>2<>Chicken's Nest<>Creep Cluster<>Restore Magicka<>Damage Stamina Regen<>Fortify Carry Weight<>Weakness to Magic<>0.2<>1<> \Hydro - thermal areas<>Crimson Nirnroot<>Damage Health<>Damage Stamina<>Invisibility<>Resist Magic<>0.2<>10<>Blackreach<>Cyrodilic Spadetail<>Damage Stamina<>Fortify Restoration<>Fear<>Ravage Health<>0.3<>15<>Lakes, rivers, streams, fish barrels<>Daedra Heart<>Restore Health<>Damage Stamina Regen<>Damage Magicka<>Fear<>0.5<>250<>Daedra<>Deathbell<>Damage Health<>Ravage Stamina<>Slow<>Weakness to Poison<>0.1<>4<>Wild, on planters<>Dragon's Tongue<>Resist Fire<>Fortify Barter<>Fortify Illusion<>Fortify Two-handed<>0.1<>5<>Hydro-thermal areas<>Dwarven Oil<>Weakness to Magic<>Fortify Illusion<>Regenerate Magicka<>Restore Magicka<>0.3<>15<>Dwemer Ruins<>Ectoplasm<>Restore Magicka<>Fortify Destruction<>Fortify Magicka<>Damage Health<>0.1<>25<>Ghostlike creatures<>Elves Ear<>Restore Magicka<>Fortify Marksman<>Weakness to Frost<>Resist Fire<>0.1<>10<>Plant, hanging herbs<>Emperor Parasol Moss‡<>Damage Health<>Fortify Magicka<>Regenerate Health<>Fortify Two - Handed<>0.3<>1<>Hanging from Emperor Parasol around Tel Mithryn.<>Eye of Sabre Cat<>Restore Stamina<>Ravage Health<>Damage Magicka<>Restore Health<>0.1<>2<>Sabre Cat, Snowy Sabre Cat<>Falmer Ear<>Damage Health<>Frenzy<>Resist Poison<>Fortify Lockpicking<>0.2<>10<>Falmer<>Felsaad Tern Feathers‡<>Restore Health<>Fortify Light Armor<>Cure Disease<>Resist Magic<>0.1<>15<>Felsaad Tern<>Fire Salts<>Weakness to Frost<>Resist Fire<>Restore Magicka<>Regenerate Magicka<>0.3<>50<>Flame Atronach<>Fly Amanita<>Resist Fire<>Fortify Two - handed<>Frenzy<>Regenerate Stamina<>0.1<>2<>Mushroom clusters in and around caves<>Frost Mirriam<>Resist Frost<>Fortify Sneak<>Ravage Magicka<>Damage Stamina Regen<>0.1<>1<>Hanging in homes, businesses and giant camps<>Frost Salts<>Weakness to Fire<>Resist Frost<>Restore Magicka<>Fortify Conjuration<>0.3<>100<>Frost Atronach<>Garlic<>Resist Poison<>Fortify Stamina<>Regenerate Magicka<>Regenerate Health<>0.3<>1<>Hanging in homes, businesses and cooking areas<>Giant Lichen<>Weakness to Shock<>Ravage Health<>Weakness to Poison<>Restore Magicka<>0.3<>5<>Swamps<>Giant's Toe<>Damage Stamina<>Fortify Health<>Fortify Carry Weight<>Damage Stamina Regen<>1<>20<>Giants<>Gleamblossom*<>Resist Magic<>Fear<>Regenerate Health<>Paralysis<>0.1<>5<>Harvested in Darkfall Cave, Forgotten Vale<>Glow Dust<>Damage Magicka<>Damage Magicka Regen<>Fortify Destruction<>Resist Shock<>0.5<>20<>Wispmother<>Glowing Mushroom<>Resist Shock<>Fortify Destruction<>Fortify Smithing<>Fortify Health<>0.2<>5<>Caves, Dwemer Ruins<>Grass Pod<>Resist Poison<>Ravage Magicka<>Fortify Alteration<>Restore Magicka<>0.1<>1<>Tundras<>Hagraven Claw<>Resist Magic<>Lingering Damage Magicka<>Fortify Enchanting<>Fortify Barter<>0.3<>20<>Hagraven<>Hagraven Feathers<>Damage Magicka<>Fortify Conjuration<>Frenzy<>Weakness to Shock<>0.1<>20<>Hagraven<>Hanging Moss<>Damage Magicka<>Fortify Health<>Damage Magicka Regen<>Fortify One - Handed<>0.3<>1<>Vegetated areas, hanging in caves, from buildings<>Hawk Beak<>Restore Stamina<>Resist Frost<>Fortify Carry Weight<>Resist Shock<>0.3<>15<>Hawks<>Hawk Feathers<>Cure Disease<>Fortify Light Armor<>Fortify One - Handed<>Fortify Sneak<>0.1<>15<>Hawks<>Hawk's Egg†<>Resist Magic<>Damage Magicka Regen<>Waterbreathing<>Lingering Damage Stamina<>0.5<>2<>Hawk's Nest<>Histcarp<>Restore Stamina<>Fortify Magicka<>Damage Stamina Regen<>Waterbreathing<>0.3<>6<>Lakes, rivers, streams and fish barrels<>Honeycomb<>Restore Stamina<>Fortify Block<>Fortify Light Armor<>Ravage Stamina<>1<>5<>Beehive<>Human Flesh<>Damage Health<>Paralysis<>Restore Magicka<>Fortify Sneak<>0.3<>1 < > Falmer Vampire dens<>Human Heart<>Damage Health<>Damage Magicka<>Damage Magicka Regen<>Frenzy<>1<>0<>Falmer Vampire dens<>Ice Wraith Teeth<>Weakness to Frost<>Fortify Heavy Armor<>Invisibility<>Weakness to Fire<>0.3<>30<>Ice Wraith<>Imp Stool<>Damage Health<>Lingering Damage Health<>Paralysis<>Restore Health<>0.3<>0<>Mushroom clusters near caves or dungeons<>Jarrin Root<>Damage Health<>Damage Magicka<>Damage Stamina<>Damage Magicka Regen<>0.5<>10<>Dark Brotherhood Quest<>Jazbay Grapes<>Weakness to Magic<>Fortify Magicka<>Regenerate Magicka<>Ravage Health<>0.2<>1<>Hydro - thermal regions<>Juniper Berries<>Weakness to Fire<>Fortify Marksman<>Regenerate Health<>Damage Stamina Regen<>0.1<>1<>Juniper Trees<>Large Antlers<>Restore Stamina<>Fortify Stamina<>Slow<>Damage Stamina Regen<>0.1<>2<>Deer, Elk<>Lavender<>Resist Magic<>Fortify Stamina<>Ravage Magicka<>Fortify Conjuration<>0.1<>1<>Outdoors in clumps<>Luna Moth Wing<>Damage Magicka<>Fortify Light Armor<>Regenerate Health<>Invisibility<>0.1<>5<>Luna Moth<>Moon Sugar<>Weakness to Fire<>Resist Frost<>Restore Magicka<>Regenerate Magicka<>0.3<>50<>Khajiit Caravans<>Mora Tapinella<>Restore Magicka<>Lingering Damage Health<>Regenerate Stamina<>Fortify Illusion<>0.3<>4<>Dead Trees<>Mudcrab Chitin<>Restore Stamina<>Cure Disease<>Resist Poison<>Resist Fire<>0.3<>2<>Mudcrabs<>Namira's Rot<>Damage Magicka<>Fortify Lockpicking<>Fear<>Regenerate Health<>0.3<>0<>Caves<>Netch Jelly‡<>Paralysis<>Fortify Carry Weight<>Restore Stamina<>Fear<>0.5<>20<>Netch<>Nightshade<>Damage Health<>Damage Magicka Regen<>Lingering Damage Stamina<>Fortify Destruction<>0.1<>8<>Graveyards, undead areas<>Nirnroot<>Damage Health<>Damage Stamina<>Invisibility<>Resist Magic<>0.2<>10<>Near water<>Nordic Barnacle<>Damage Magicka<>Waterbreathing<>Regenerate Health<>Fortify Pickpocket<>0.2<>5<>Underwater<>Orange Dartwing<>Restore Stamina<>Ravage Magicka<>Fortify Pickpocket<>Lingering Damage Health<>0.1<>1<>Hovering above water<>Pearl<>Restore Stamina<>Fortify Block<>Restore Magicka<>Resist Shock<>0.1<>2<>Satchels; Alchemy Laboratory of a Homestead† Pearl Oyster‡<>Pine Thrush Egg<>Restore Stamina<>Fortify Lockpicking<>Weakness to Poison<>Resist Shock<>0.5<>2<>Nests in forests<>Poison Bloom*<>Damage Health<>Slow<>Fortify Carry Weight<>Fear<>0.3<>5<>Darkfall Cave<>Powdered Mammoth Tusk<>Restore Stamina<>Fortify Sneak<>Weakness to Fire<>Fear<>0.1<>2<>Giant Camps, Alchemy Laboratory of a Homestead†<>Purple Mountain Flower<>Restore Stamina<>Fortify Sneak<>Lingering Damage Magicka<>Resist Frost<>0.1<>2<>Mountain flower clumps<>Red Mountain Flower<>Restore Magicka<>Ravage Magicka<>Fortify Magicka<>Damage Health<>0.1<>2<>Mountain flower clumps<>River Betty<>Damage Health<>Fortify Alteration<>Slow<>Fortify Carry Weight<>0.3<>15<>Lakes, rivers, streams and fish barrels<>Rock Warbler Egg<>Restore Health<>Fortify One - Handed<>Damage Stamina<>Weakness to Magic<>0.5<>2<>Rock Warbler Nest<>Sabre Cat Tooth<>Restore Stamina<>Fortify Heavy Armor<>Fortify Smithing<>Weakness to Poison<>0.1<>2<>Sabre Cat, Frost Sabre Cat<>Salmon Roe†<>Restore Stamina<>Waterbreathing<>Fortify Magicka<>Regenerate Magicka<>0.2<>5<>Salmon jumping up falls, Kitchen of a Homestead†<>Salt Pile<>Weakness to Magic<>Fortify Restoration<>Slow<>Regenerate Magicka<>0.2<>2<>Merchants, containers, near cooking places<>Scaly Pholiota<>Weakness to Magic<>Fortify Illusion<>Regenerate Stamina<>Fortify Carry Weight<>0.3<>4<>Dead birch trees<>Scathecraw‡<>Ravage Health<>Ravage Stamina<>Ravage Magicka<>Lingering Damage Health<>0.1<>1<>Harvested all over Solstheim<>Silverside Perch<>Restore Stamina<>Damage Stamina Regen<>Ravage Health<>Resist Frost<>0.3<>15<>Lakes, rivers, streams and fish barrels<>Skeever Tail<>Damage Stamina Regen<>Ravage Health<>Damage Health<>Fortify Light Armor<>0.2<>3<>Skeever<>Slaughterfish Egg<>Resist Poison<>Fortify Pickpocket<>Lingering Damage Health<>Fortify Stamina<>0.2<>3<>Underwater<>Slaughterfish Scales<>Resist Frost<>Lingering Damage Health<>Fortify Heavy Armor<>Fortify Block<>0.1<>3<>Slaughterfish<>Small Antlers<>Weakness to Poison<>Fortify Restoration<>Lingering Damage Stamina<>Damage Health<>0.1<>2<>Elk<>Small Pearl<>Restore Stamina<>Fortify One - Handed<>Fortify Restoration<>Resist Frost<>0.1<>2 < > Pearl Oyster‡<>Snowberries<>Resist Fire<>Fortify Enchanting<>Resist Frost<>Resist Shock<>0.1<>4<>Snowberry bush, snowy areas<>Spawn Ash‡<>Ravage Stamina<>Resist Fire<>Fortify Enchanting<>Ravage Magicka<>0.1<>20<>Ash Spawn<>Spider Egg<>Damage Stamina<>Damage Magicka Regen<>Fortify Lockpicking<>Fortify Marksman<>0.2<>5<>Spider lairs<>Spriggan Sap<>Damage Magicka Regen<>Fortify Enchanting<>Fortify Smithing<>Fortify Alteration<>0.2<>15<>Spriggan<>Swamp Fungal Pod<>Resist Shock<>Lingering Damage Magicka<>Paralysis<>Restore Health<>0.5<>3<>Swamps<>Taproot<>Weakness to Magic<>Fortify Illusion<>Regenerate Magicka<>Restore Magicka<>0.5<>15<>Spriggan<>Thistle Branch<>Resist Frost<>Ravage Stamina<>Resist Poison<>Fortify Heavy Armor<>0.1<>1<>Thistle Plant<>Torchbug Thorax<>Restore Stamina<>Lingering Damage Magicka<>Weakness to Magic<>Fortify Stamina<>0.1<>1<>Torchbugs, glowing at night<>Trama Root‡<>Weakness to Shock<>Fortify Carry Weight<>Damage Magicka<>Slow<>0.2<>1<>Harvested from ashen areas of Solstheim<>Troll Fat<>Resist Poison<>Fortify Two - handed<>Frenzy<>Damage Health<>1<>15<>Trolls<>Tundra Cotton<>Resist Magic<>Fortify Magicka<>Fortify Block<>Fortify Barter<>0.1<>1<>High mountains below snow line, tundra<>Vampire Dust<>Invisibility<>Restore Magicka<>Regenerate Health<>Cure Disease<>0.2<>25<>Vampires, the Silver Hand<>Void Salts<>Weakness to Shock<>Resist Magic<>Damage Health<>Fortify Magicka<>0.2<>125<>Storm Atronach<>Wheat<>Restore Health<>Fortify Health<>Damage Stamina Regen<>Lingering Damage Magicka<>0.1<>5<>Grows on farms, containers<>White Cap<>Weakness to Frost<>Fortify Heavy Armor<>Restore Magicka<>Ravage Magicka<>0.3<>0<>Mushroom clusters near caves or dungeons<>Wisp Wrappings<>Restore Stamina<>Fortify Destruction<>Fortify Carry Weight<>Resist Magic<>0.1<>2<>Wispmother<>Yellow Mountain Flower*<>Resist Poison<>Fortify Restoration<>Fortify Health<>Damage Stamina Regen<>0.1<>2<>Darkfall Cave";
+
+
+
+
+ 				
+int main(){
+	//load the text file and put it into a single string:
+	ifstream in("alchemydata.txt");
+	stringstream buffer;
+	buffer << in.rdbuf();
+	string test = buffer.str();
+
+	//create variables that will act as "cursors". we'll take everything between them.
+	size_t pos1 = 0;
+	size_t pos2;
+
+	struct ingredient {
+		string name;
+		string e1;
+		string e2;
+		string e3;
+		string e4;
+		string wt;
+		string val;
+		string loc;
+	} ingredients[111];
+
+	if (in.is_open()) {
+
+		//FUNCTION TO EXTRACT FROM FILE
+		for (int x = 0; x <= 110; x++){
+			pos2 = test.find("&", pos1); //search for the "&". pos2 will be where the bar was found.
+			ingredients[x].name = test.substr(pos1, (pos2 - pos1)); //make a substring, which is nothing more 
+			//than a copy of a fragment of the big string.
+			//cout << "Name: " << ingredients[x].name << endl;
+			pos1 = pos2 + 1;
+
+			pos2 = test.find("&", pos1);
+			ingredients[x].e1 = test.substr(pos1, (pos2 - pos1));
+			//cout << "Effect 1: " << ingredients[x].e1 << endl;
+			pos1 = pos2 + 1;
+
+			pos2 = test.find("&", pos1);
+			ingredients[x].e2 = test.substr(pos1, (pos2 - pos1));
+			//cout << "Effect 2: " << ingredients[x].e2 << endl;
+			pos1 = pos2 + 1;
+
+			pos2 = test.find("&", pos1);
+			ingredients[x].e3 = test.substr(pos1, (pos2 - pos1));
+			//cout << "Effect 3: " << ingredients[x].e3 << endl;
+			pos1 = pos2 + 1;
+
+			pos2 = test.find("&", pos1);
+			ingredients[x].e4 = test.substr(pos1, (pos2 - pos1));
+			//cout << "Effect 4: " << ingredients[x].e4 << endl;
+			pos1 = pos2 + 1;
+
+			pos2 = test.find("&", pos1);
+			ingredients[x].wt = test.substr(pos1, (pos2 - pos1));
+			//cout << "Weight: " << ingredients[x].wt << endl;
+			pos1 = pos2 + 1;
+
+			pos2 = test.find("&", pos1);
+			ingredients[x].val = test.substr(pos1, (pos2 - pos1));
+			//cout << "Value: " << ingredients[x].val << endl;
+			pos1 = pos2 + 1;
+
+			pos2 = test.find("&", pos1);
+			ingredients[x].loc = test.substr(pos1, (pos2 - pos1));
+			//cout << "Location: " << ingredients[x].loc << endl;
+			//cout << "\n";
+			pos1 = pos2 + 1;
+
+
+			// sets pos1 to the next character after pos2
+			//so, it can start searching the next &
+		}
+		cout << "File opened.\n";
+
+		//HERE, STORE EFFECT NAMES IN A VECTOR AND ALPHABETIZE
+
+		string effects[56];
+		string compare[4];
+		int x = 0, y = 0, z = 0;
+		int u = 0;
+		int tf = 0;
+
+
+		for (x = 0; x <= 110; x++) {			//store effects in array (alphabetize)
+			cout << x;
+			compare[0] = ingredients[x].e1;
+			//cout << compare[0];
+			compare[1] = ingredients[x].e2;
+			//cout << compare[1];
+			compare[2] = ingredients[x].e3;
+			//cout << compare[2];
+			compare[3] = ingredients[x].e4;
+			//cout << compare[3];
+			for (y = 0; y <= 3; y++){
+				for (z = 0, tf = 1; tf != 0 && z <= u + 1; z++) {
+					if (compare[y] != effects[z]){
+						tf = 1;
+						//cout << y;
+					}
+					else tf = 0;
+				}
+				if (tf != 0) {
+					effects[u] = compare[y];
+					cout << effects[u] << u << "\n";
+					u++;
+				};
+				//stop and go to the next variable
+			}
+			cout << "\n";
+		}
+		bool mark;
+
+		do
+		{
+			mark = 0;
+			for (int count = 0; count < u - 1; count++)
+			{
+				if (effects[count] > effects[count + 1])
+				{
+					effects[count].swap(effects[count + 1]);
+					mark = 1;
+				}
+
+			}
+		} while (mark == 1);
+
+
+		for (z = 0; z <= u; z++) {
+			cout << z << effects[z] << "\n";
+		}
+
+
+		//Find the rarest
+		int rare4[7];
+		int rare5[7];
+		int rare6[5];
+		int rare7[11];
+		int rare8[10];
+		int rare9[4];
+		int rare10[2];
+		int rare11[10];
+		int r4 = 0;
+		int r5 = 0;
+		int r6 = 0;
+		int r7 = 0;
+		int r8 = 0;
+		int r9 = 0;
+		int r10 = 0;
+		int r11 = 0;
+		int r = 0;
+
+
+
+		for (z = 0; z <= u; z++) {
+			r = 0;
+			cout << "\nChecking effect: " << effects[z];
+			for (x = 0; x <= 110 && r <= 10; x++) {
+				if (effects[z] == ingredients[x].e1) {
+					r++;
+				}
+				if (effects[z] == ingredients[x].e2) {
+					r++;
+				}
+				if (effects[z] == ingredients[x].e3) {
+					r++;
+				}
+				if (effects[z] == ingredients[x].e4) {
+					r++;
+				}
+			}
+			cout << "Total count:" << r << "\n";
+
+			if (r == 4) {
+				rare4[r4] = z;
+				r4++;
+			}
+			if (r == 5) {
+				rare5[r5] = z;
+				r5++;
+			}
+			if (r == 6) {
+				rare6[r6] = z;
+				r6++;
+			}
+			if (r == 7) {
+				rare7[r7] = z;
+				r7++;
+			}
+			if (r == 8) {
+				rare8[r8] = z;
+				r8++;
+			}
+			if (r == 9) {
+				rare9[r9] = z;
+				r9++;
+			}
+			if (r == 10) {
+				rare10[r10] = z;
+				r10++;
+			}
+			if (r == 11) {
+				rare11[r11] = z;
+				r11++;
+			}
+
+		}
+
+		cout << "\n4: " << r4;
+		cout << "\n5: " << r5;
+		cout << "\n6: " << r6;
+		cout << "\n7: " << r7;
+		cout << "\n8: " << r8;
+		cout << "\n9: " << r9;
+		cout << "\n10: " << r10;
+		cout << "\n11: " << r11;
+
+		
+		int i4[28];
+		int i5[35];
+		int i6[20];
+		int i7[20];
+		int i8[20];
+		int i9[20];
+		int i10[20];
+		int i11[20];
+
+		u = 0;
+		for (z = 0; z <= r4 - 1; z++) {
+				for (x = 0; x <= 110; x++) {
+					r = -1;
+					if (effects[rare4[z]] == ingredients[x].e1) {
+						r = x;
+					}
+					if (effects[rare4[z]] == ingredients[x].e2) {
+						r = x;
+					}
+					if (effects[rare4[z]] == ingredients[x].e3) {
+						r = x;
+					}
+					if (effects[rare4[z]] == ingredients[x].e4) {
+						r = x;
+					}
+					if (r != -1) {
+						i4[u] = r;
+						cout << "\nStored in i4: " << ingredients[r].name << u;
+						u++;
+					}
+				}
+		}
+
+		u = 0;
+		for (z = 0; z <= r5 - 1; z++) {
+			for (x = 0; x <= 110; x++) {
+				r = -1;
+				if (effects[rare5[z]] == ingredients[x].e1) {
+					r = x;
+				}
+				if (effects[rare5[z]] == ingredients[x].e2) {
+					r = x;
+				}
+				if (effects[rare5[z]] == ingredients[x].e3) {
+					r = x;
+				}
+				if (effects[rare5[z]] == ingredients[x].e4) {
+					r = x;
+				}
+				
+				if (r != -1) {
+					i5[u] = r;
+					u++;
+					cout << "\nStored in i5: " << ingredients[r].name << u;
+				}
+			}
+		}
+
+
+		
+		
+		int ol = 0;
+		string olarr[50];
+
+		for (x = 0; x <= 34; x++){
+			for (y = 0; y <= 34; y++){
+				if (i4[x] == i4[y] && x != y){
+					olarr[ol] = ingredients[i4[y]].name;
+					cout << "\nDouble4: " << olarr[ol];
+					ol++;
+				}
+			}
+		}
+
+		for (x = 0; x <= 34; x++){
+			for (y = 0; y <= 34; y++){
+				if (i5[x] == i5[y] && x != y){
+					olarr[ol] = ingredients[i5[y]].name;
+					cout << "\nDouble5: " << olarr[ol];
+					ol++;
+				}
+			}
+		}
+
+		for (x = 0; x <= 27; x++){
+			for (y = 0; y <= 34; y++){
+				if (i4[x] == i5[y]) {
+					olarr[ol] = ingredients[i5[y]].name;
+					cout << "\nDouble: " << olarr[ol];
+					ol++;
+				}
+			}
+		}
+
+
+		cout << "\nOverlap: " << ol;
+
+
+
+		//for (z = 0; z <= r4 - 1; z++){
+		//	cout << "\nFour count effects: " << effects[rare4[z]];
+		//}
+
+
+		/*int count[98];
+		string combo[56];
+		struct res {
+		int i1;
+		int i2;
+		int i3;
+		int i4;
+		int i5;
+		int i6;
+		int i7;
+		int i8;
+		int i9;
+		int i10;
+		int i11;
+		int i12;
+		int i13;
+		int i14;
+		int reps;
+		};
+
+		//HERE, CREATE COMBINATIONS AND COUNT REPEATS
+		unsigned int a, b, c, d, e, f, g, h, i, j, k, l, m, n;
+		a = 0;
+
+
+
+		/*for (a = 0, b = a + 1, c = a + 2, d = a + 3, e = a + 4, f = a + 5, g = a + 6, h = a + 7, i = a + 8, j = a + 9, k = a + 10, l = a + 11, m = a + 12, n = a + 13; a <= 97; a++){
+		for (b = a + 1; b <= 98; b++){
+		for (c = a + 2; c <= 99; c++){
+		for (d = a + 3; d <= 100; d++){
+		for (e = a + 4; e <= 101; e++){
+		for (f = a + 5; f <= 102; f++){
+		for (g = a + 6; g <= 103; g++){
+		for (h = a + 7; h <= 104; h++){
+		for (i = a + 8; i <= 105; i++){
+		for (j = a + 9; j <= 106; j++){
+		for (k = a + 10; k <= 107; k++){
+		for (l = a + 11; l <= 108; l++){
+		for (m = a + 12; m <= 109; m++){
+		for (n = a + 12; n <= 110; n++){
+		combo[0] = ingredients[a].e1;
+		//cout << combo[0];
+		combo[1] = ingredients[a].e2;
+		//cout << combo[1];
+		combo[2] = ingredients[a].e3;
+		//cout << combo[2];
+		combo[3] = ingredients[a].e4;
+		//cout << combo[3];
+		combo[4] = ingredients[b].e1;
+		combo[5] = ingredients[b].e2;
+		combo[6] = ingredients[b].e3;
+		combo[7] = ingredients[b].e4;
+		combo[8] = ingredients[c].e1;
+		combo[9] = ingredients[c].e2;
+		combo[10] = ingredients[c].e3;
+		combo[11] = ingredients[c].e4;
+		combo[12] = ingredients[d].e1;
+		combo[13] = ingredients[d].e2;
+		combo[14] = ingredients[d].e3;
+		combo[15] = ingredients[d].e4;
+		combo[16] = ingredients[e].e1;
+		combo[17] = ingredients[e].e2;
+		combo[18] = ingredients[e].e3;
+		combo[19] = ingredients[e].e4;
+		combo[20] = ingredients[f].e1;
+		combo[21] = ingredients[f].e2;
+		combo[22] = ingredients[f].e3;
+		combo[23] = ingredients[f].e4;
+		combo[24] = ingredients[g].e1;
+		combo[25] = ingredients[g].e2;
+		combo[26] = ingredients[g].e3;
+		combo[27] = ingredients[g].e4;
+		combo[28] = ingredients[h].e1;
+		combo[29] = ingredients[h].e2;
+		combo[30] = ingredients[h].e3;
+		combo[31] = ingredients[h].e4;
+		combo[32] = ingredients[i].e1;
+		combo[33] = ingredients[i].e2;
+		combo[34] = ingredients[i].e3;
+		combo[35] = ingredients[i].e4;
+		combo[36] = ingredients[j].e1;
+		combo[37] = ingredients[j].e2;
+		combo[38] = ingredients[j].e3;
+		combo[39] = ingredients[j].e4;
+		combo[40] = ingredients[k].e1;
+		combo[41] = ingredients[k].e2;
+		combo[42] = ingredients[k].e3;
+		combo[43] = ingredients[k].e4;
+		combo[44] = ingredients[l].e1;
+		combo[45] = ingredients[l].e2;
+		combo[46] = ingredients[l].e3;
+		combo[47] = ingredients[l].e4;
+		combo[48] = ingredients[m].e1;
+		combo[49] = ingredients[m].e2;
+		combo[50] = ingredients[m].e3;
+		combo[51] = ingredients[m].e4;
+		combo[52] = ingredients[n].e1;
+		combo[53] = ingredients[n].e2;
+		combo[54] = ingredients[n].e3;
+		combo[55] = ingredients[n].e4;
+		}
+		}
+		}
+		}
+		}
+		}
+		}
+		}
+		}
+		}
+		}
+		}
+		}
+		cout << a;
+		}*/
+
+		//take ingredients[0] and ingredients[1] and compare e1-e4, e1-e1,e1-e2,e1-e3,e1-e4,e2-e2,e2-e3,e2-e4,e3-e3,e3-e4,e4-e4
+		//count similarities
+		//compare third ingredient
+		//count and add to  first count
+		//compare 4th
+		//count and add
+		//compare 5th
+		//count and add
+		//FORGET THAT!^^^
+		//need something to retrieve the separate effects and store them as a standard effect (this will help with the form too)
+		//_______________________________________
+		//^^^ DIDN'T WORK! It would take 95 million years to solve
+		/*New plan: 1.find rarest effects (and 2nd and third too?)
+		2. Check which ingredients can combine with without overlap
+		3. Eliminate the overlappers, check that all effects are still present
+		4. Then run all possible combos?
+		*/
+	}
+	else cout << "Can't open the file. Why the heck would it do that?";
+
+	return 0;
+}

@@ -286,7 +286,73 @@ int main(){
 			}
 		}
 
-
+		
+		int groupm = -1;
+		string group[14];
+		int lastgroupm = -1;
+		string lastgroup[50];
+		int g1im = -1;
+		int g1i[11];
+		int g2im = -1;
+		int g2i[11];
+		int g3im = -1;
+		int g3i[11];
+		int g4im = -1;
+		int g4i[11];
+		int g5im = -1;
+		int g5i[11];
+		int g6im = -1;
+		int g6i[11];
+		int g7im = -1;
+		int g7i[11];
+		int g8im = -1;
+		int g8i[11];
+		int g9im = -1;
+		int g9i[11];
+		int g10im = -1;
+		int g10i[11];
+		int g11im = -1;
+		int g11i[11];
+		int g12im = -1;
+		int g12i[11];
+		int g13im = -1;
+		int g13i[11];
+		int g14im = -1;
+		int g14i[11];
+		int scombo[14];
+		
+		if (r4 < 13) {
+			for (x = 0; x <= r4, x++) {
+				groupm++;
+				group[x] = rare4[x];
+			}
+			if (r4 + r5 < 12) {
+				for (x = r4; x <= r4 + r5, x++) {
+					groupm++;
+					group[x] = rare5[x];
+				}	
+			}
+			else for (x = 0; x <= r5; x++) {
+				lastgroupm++;
+				lastgroup[x] = rare4[x];
+			}
+		} 
+		else for (x = 0; x <= r4; x++) {
+			lastgroupm++;
+			lastgroup[x] = rare4[x];
+		}
+		
+		if (groupm < 13) {
+			while (x <= groupm) {
+				x = 0;
+				for (y = 0; y <= 110; y++) {
+					if (group[x] == ingredients[y].e1) {
+						g1i++;
+						
+					}
+				}
+			}
+		}
 		
 		
 		int ol = 0;

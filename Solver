@@ -152,14 +152,14 @@ int main(){
 		int rare9[4];
 		int rare10[2];
 		int rare11[10];
-		int r4 = 0;
-		int r5 = 0;
-		int r6 = 0;
-		int r7 = 0;
-		int r8 = 0;
-		int r9 = 0;
-		int r10 = 0;
-		int r11 = 0;
+		int r4 = -1;
+		int r5 = -1;
+		int r6 = -1;
+		int r7 = -1;
+		int r8 = -1;
+		int r9 = -1;
+		int r10 = -1;
+		int r11 = -1;
 		int r = 0;
 
 
@@ -184,36 +184,36 @@ int main(){
 			cout << "Total count:" << r << "\n";
 
 			if (r == 4) {
-				rare4[r4] = z;
 				r4++;
+				rare4[r4] = z;
 			}
 			if (r == 5) {
-				rare5[r5] = z;
 				r5++;
+				rare5[r5] = z;
 			}
 			if (r == 6) {
-				rare6[r6] = z;
 				r6++;
+				rare6[r6] = z;
 			}
 			if (r == 7) {
-				rare7[r7] = z;
 				r7++;
+				rare7[r7] = z;
 			}
 			if (r == 8) {
-				rare8[r8] = z;
 				r8++;
+				rare8[r8] = z;
 			}
 			if (r == 9) {
-				rare9[r9] = z;
 				r9++;
+				rare9[r9] = z;
 			}
 			if (r == 10) {
-				rare10[r10] = z;
 				r10++;
+				rare10[r10] = z;
 			}
 			if (r == 11) {
-				rare11[r11] = z;
 				r11++;
+				rare11[r11] = z;
 			}
 
 		}
@@ -227,7 +227,33 @@ int main(){
 		cout << "\n10: " << r10;
 		cout << "\n11: " << r11;
 
-		
+		/*//Find the top 14 rarest effects and set up for rotation in the last effect group
+		int grouper = 0;
+		int lastgrouper = 0;
+
+
+		if (r4 < 13) {
+			for (x = 0; x <= r4; x++) {
+
+			}
+			if (r4 + r5 < 12) {
+				if (r4 + r5 + r6 < 11) {
+					if (r4 + r5 + r6 + r7 < 10) {
+						if (r4 + r5 + r6 + r7 + r8 < 9) {
+							if (r4 + r5 + r6 + r7 + r8 + r9 < 8) {
+								if (r4 + r5 + r6 + r7 + r8 + r9 + r10 < 7) {
+									if (r4 + r5 + r6 + r7 + r8 + r9 + r10 + r11 < 6) {
+										cout << "Ingredients don't cover 14 different effects, add more ingredients/effects.\n";
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}*/
+
+		/*//need to trade these out for individual effects
 		int i4[28];
 		int i5[35];
 		int i6[20];
@@ -238,7 +264,7 @@ int main(){
 		int i11[20];
 
 		u = 0;
-		for (z = 0; z <= r4 - 1; z++) {
+		for (z = 0; z <= r4; z++) {
 				for (x = 0; x <= 110; x++) {
 					r = -1;
 					if (effects[rare4[z]] == ingredients[x].e1) {
@@ -262,7 +288,7 @@ int main(){
 		}
 
 		u = 0;
-		for (z = 0; z <= r5 - 1; z++) {
+		for (z = 0; z <= r5; z++) {
 			for (x = 0; x <= 110; x++) {
 				r = -1;
 				if (effects[rare5[z]] == ingredients[x].e1) {
@@ -285,8 +311,9 @@ int main(){
 				}
 			}
 		}
+		*/
 
-		int w;
+		//take the most rare effect groups and put them in a group of 14 ingredients, with a last remainder group to be added in different combinations.
 		int groupm = -1;
 		string group[14];
 		int lastgroupm = -1;
@@ -319,537 +346,934 @@ int main(){
 		int g13i[11];
 		int g14im = -1;
 		int g14i[11];
-		int scombo[14];
-		
-		if (r4 < 13) {
-			for (x = 0; x <= r4, x++) {
+
+	
+
+
+		if (r4 <= 13) {
+			for (groupm = -1, y = 0; y <= r4; y++) {
 				groupm++;
-				group[x] = rare4[x];
+				group[groupm] = effects[rare4[y]];
+				//cout << "\nThis was just added to 'group': " << group[groupm];
 			}
-			if (r4 + r5 < 12) {
-				for (x = r4; x <= r4 + r5, x++) {
+		}
+			if (r4 + r5 <= 12) {
+				for (y = 0; y <= r5; y++) {
 					groupm++;
-					group[x] = rare5[x];
-				}	
+					group[groupm] = effects[rare5[y]];
+					//cout << "\nThis was just added to 'group': " << group[groupm];
+				}
 			}
-			else for (x = 0; x <= r5; x++) {
+		/*	else for (x = 0; x <= r5; x++) {
 				lastgroupm++;
 				lastgroup[x] = rare4[x];
 			}
-		} 
+		}
 		else for (x = 0; x <= r4; x++) {
 			lastgroupm++;
 			lastgroup[x] = rare4[x];
 		}
-		
-		
-		while (x <= groupm) {
-				x = 0;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g1im++;
-						g1i[g1im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g1im++;
-						g1i[g1im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g1im++;
-						g1i[g1im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g1im++;
-						g1i[g1im] = y;
-					}
-				}
-				x = 1;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g2im++;
-						g2i[g2im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g2im++;
-						g2i[g2im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g2im++;
-						g2i[g2im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g2im++;
-						g2i[g2im] = y;
-					}
-				}
-				x = 2;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g3im++;
-						g3i[g3im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g3im++;
-						g3i[g3im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g3im++;
-						g3i[g3im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g3im++;
-						g3i[g3im] = y;
-					}
-				}
-				x = 3;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g4im++;
-						g4i[g4im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g4im++;
-						g4i[g4im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g4im++;
-						g4i[g4im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g4im++;
-						g4i[g4im] = y;
-					}
-				}
-				x = 4;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g5im++;
-						g5i[g5im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g5im++;
-						g5i[g5im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g5im++;
-						g5i[g5im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g5im++;
-						g5i[g5im] = y;
-					}
-				}
-				x = 5;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g6im++;
-						g6i[g6im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g6im++;
-						g6i[g6im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g6im++;
-						g6i[g6im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g6im++;
-						g6i[g6im] = y;
-					}
-				}
-				x = 6;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g7im++;
-						g7i[g7im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g7im++;
-						g7i[g7im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g7im++;
-						g7i[g7im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g7im++;
-						g7i[g7im] = y;
-					}
-				}
-				x = 7;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g8im++;
-						g8i[g8im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g8im++;
-						g8i[g8im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g8im++;
-						g8i[g8im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g8im++;
-						g8i[g8im] = y;
-					}
-				}
-				x = 8;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g9im++;
-						g9i[g9im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g9im++;
-						g9i[g9im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g9im++;
-						g9i[g9im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g9im++;
-						g9i[g9im] = y;
-					}
-				}
-				x = 9;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g10im++;
-						g10i[g10im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g10im++;
-						g10i[g10im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g10im++;
-						g10i[g10im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g10im++;
-						g10i[g10im] = y;
-					}
-				}
-				x = 10;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g11im++;
-						g11i[g11im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g11im++;
-						g11i[g11im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g11im++;
-						g11i[g11im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g11im++;
-						g11i[g11im] = y;
-					}
-				}
-				x = 11;
-			for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g12im++;
-						g12i[g12im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g12im++;
-						g12i[g12im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g12im++;
-						g12i[g12im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g12im++;
-						g12i[g12im] = y;
-					}
-				}
-				x = 12;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g13im++;
-						g13i[g13im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g13im++;
-						g13i[g13im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g13im++;
-						g13i[g13im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g13im++;
-						g13i[g13im] = y;
-					}
-				}
-				x = 13;
-				for (y = 0; y <= 110; y++) {
-					if (group[x] == ingredients[y].e1) {
-						g14im++;
-						g14i[g14im] = y;
-					}
-					if (group[x] == ingredients[y].e2) {
-						g14im++;
-						g14i[g14im] = y;
-					}
-					if (group[x] == ingredients[y].e3) {
-						g14im++;
-						g14i[g14im] = y;
-					}
-					if (group[x] == ingredients[y].e4) {
-						g14im++;
-						g14i[g14im] = y;
-					}
-				}
+
+		for (x = 0; x <= 54; x++){
+			cout << "the effects: " << effects[x];
+		}*/
+
+		cout << "These are the rarest effects: " << group[0] << " " << group[1] << " " << group[2] << " " << group[3];
+
+		/*for (x = 0; x <= groupm; x++) {
+			cout << "These are the rarest effects: " << effects[group[x]];
 		}
-		
-		
-		//Add on the last group in a way that can be recombined
-		
-		
-		
-		//Do the combos d
-		
-		unsigned int a, b, c, d, e, f, g, h, i, j, k, l, m, n;
-		a = 0;
-		
-		int count[98];
-		string combo[56];
-		struct res {
-		int i1;
-		int i2;
-		int i3;
-		int i4;
-		int i5;
-		int i6;
-		int i7;
-		int i8;
-		int i9;
-		int i10;
-		int i11;
-		int i12;
-		int i13;
-		int i14;
-		int reps;
-		} sol[5];
-		
-		if (lastgroupm == -1) {
-		for (a = 0; a <= g1im; a++){
-		for (b = 0; b <= g2im; b++){
-			do {
-				mark = 1;
-				if (g2i[b] == g1i[a]){
-					b++;
-					mark = 0;
+*/
+
+		//Have each ingredient of that effect put into a group
+		x = 0;
+		while (x <= groupm) {
+			cout << "\nIT STARTED!";
+			x = 0;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g1im++;
+					g1i[g1im] = y;
 				}
-			} while (mark == 0);
-		for (c = 0; c <= g3im; c++){
-			do {
-				if (g3i[c] == g1i[a]){
-					c++;
-					mark = 0;
+				if (group[x] == ingredients[y].e2) {
+					g1im++;
+					g1i[g1im] = y;
 				}
-				if (g3i[c] == g2i[b]){
-					c++;
-					mark = 0;
+				if (group[x] == ingredients[y].e3) {
+					g1im++;
+					g1i[g1im] = y;
 				}
-			} while (mark == 0);
-		for (d = 0; d <= g4im; d++){
-			do {
-				if (g4i[d] == g1i[a]){
-					d++;
-					mark = 0;
-				}
-				if (g4i[d] == g2i[b]){
-					d++;
-					mark = 0;
-				}
-				if (g4i[d] == g3i[c]){
-					d++;
-					mark = 0;
-				}
-			} while (mark == 0);
-		for (e = 0; e <= g5im; e++){
-			do {
-				if (g5i[e] == g1i[a]){
-					e++;
-					mark = 0;
-				}
-				if (g5i[e] == g2i[b]){
-					e++;
-					mark = 0;
-				}
-				if (g5i[e] == g3i[c]){
-					e++;
-					mark = 0;
-				}
-				if (g5i[e] == g4i[d]){
-					e++;
-					mark = 0;
-				}
-			} while (mark == 0);
-		for (f = 0; f <= g6im; f++){
-			do {
-				if (g6i[f] == g1i[a]){
-					f++;
-					mark = 0;
-				}
-				if (g6i[f] == g2i[b]){
-					f++;
-					mark = 0;
-				}
-				if (g6i[f] == g3i[c]){
-					f++;
-					mark = 0;
-				}
-				if (g6i[f] == g4i[d]){
-					f++;
-					mark = 0;
-				}
-				if (g6i[f] == g5i[e]){
-					f++;
-					mark = 0;
-				}
-			} while (mark == 0);
-		for (g = 0; g <= g7im; g++){
-			do {
-				if (g7i[g] == g1i[a]){
-					g++;
-					mark = 0;
-				}
-				if (g7i[g] == g2i[b]){
-					g++;
-					mark = 0;
-				}
-				if (g7i[g] == g3i[c]){
-					g++;
-					mark = 0;
-				}
-				if (g7i[g] == g4i[d]){
-					g++;
-					mark = 0;
-				}
-				if (g7i[g] == g5i[e]){
-					g++;
-					mark = 0;
-				}
-				if (g7i[g] == g6i[f]){
-					g++;
-					mark = 0;
-				}
-			} while (mark == 0);
-		for (h = 0; h <= g8im; h++){
-		for (i = 0; i <= g9im; i++){
-		for (j = 0; j <= g10im; j++){
-		for (k = 0; k <= g11im; k++){
-		for (l = 0; l <= g12im; l++){
-		for (m = 0; m <= g13im; m++){
-		for (n = 0; n <= g14im; n++){
-		combo[0] = ingredients[g1i[a]].e1;
-		//cout << combo[0];
-		combo[1] = ingredients[g1i[a]].e2;
-		//cout << combo[1];
-		combo[2] = ingredients[g1i[a]].e3;
-		//cout << combo[2];
-		combo[3] = ingredients[g1i[a]].e4;
-		//cout << combo[3];
-		combo[4] = ingredients[g2i[b]].e1;
-		combo[5] = ingredients[g2i[b]].e2;
-		combo[6] = ingredients[g2i[b]].e3;
-		combo[7] = ingredients[g2i[b]].e4;
-		combo[8] = ingredients[g3i[c]].e1;
-		combo[9] = ingredients[g3i[c]].e2;
-		combo[10] = ingredients[g3i[c]].e3;
-		combo[11] = ingredients[g3i[c]].e4;
-		combo[12] = ingredients[g4i[d]].e1;
-		combo[13] = ingredients[g4i[d]].e2;
-		combo[14] = ingredients[g4i[d]].e3;
-		combo[15] = ingredients[g4i[d]].e4;
-		combo[16] = ingredients[g5i[e]].e1;
-		combo[17] = ingredients[g5i[e]].e2;
-		combo[18] = ingredients[g5i[e]].e3;
-		combo[19] = ingredients[g5i[e]].e4;
-		combo[20] = ingredients[g6i[f]].e1;
-		combo[21] = ingredients[g6i[f]].e2;
-		combo[22] = ingredients[g6i[f]].e3;
-		combo[23] = ingredients[g6i[f]].e4;
-		combo[24] = ingredients[g7i[g]].e1;
-		combo[25] = ingredients[g7i[g]].e2;
-		combo[26] = ingredients[g7i[g]].e3;
-		combo[27] = ingredients[g7i[g]].e4;
-		combo[28] = ingredients[g8i[h]].e1;
-		combo[29] = ingredients[g8i[h]].e2;
-		combo[30] = ingredients[g8i[h]].e3;
-		combo[31] = ingredients[g8i[h]].e4;
-		combo[32] = ingredients[g9i[i]].e1;
-		combo[33] = ingredients[g9i[i]].e2;
-		combo[34] = ingredients[g9i[i]].e3;
-		combo[35] = ingredients[g9i[i]].e4;
-		combo[36] = ingredients[g10i[j]].e1;
-		combo[37] = ingredients[g10i[j]].e2;
-		combo[38] = ingredients[g10i[j]].e3;
-		combo[39] = ingredients[g10i[j]].e4;
-		combo[40] = ingredients[g11i[k]].e1;
-		combo[41] = ingredients[g11i[k]].e2;
-		combo[42] = ingredients[g11i[k]].e3;
-		combo[43] = ingredients[g11i[k]].e4;
-		combo[44] = ingredients[g12i[l]].e1;
-		combo[45] = ingredients[g12i[l]].e2;
-		combo[46] = ingredients[g12i[l]].e3;
-		combo[47] = ingredients[g12i[l]].e4;
-		combo[48] = ingredients[g13i[m]].e1;
-		combo[49] = ingredients[g13i[m]].e2;
-		combo[50] = ingredients[g13i[m]].e3;
-		combo[51] = ingredients[g13i[m]].e4;
-		combo[52] = ingredients[g14i[n]].e1;
-		combo[53] = ingredients[g14i[n]].e2;
-		combo[54] = ingredients[g14i[n]].e3;
-		combo[55] = ingredients[g14i[n]].e4;
-		for (x = 0, count = 0;  x <= 54; x++){
-			for (y = 0; y <= 55; y++){
-				if (effects[x] == combo[y]) {
-					count++;
+				if (group[x] == ingredients[y].e4) {
+					g1im++;
+					g1i[g1im] = y;
 				}
 			}
+			x = 1;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g2im++;
+					g2i[g2im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g2im++;
+					g2i[g2im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g2im++;
+					g2i[g2im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g2im++;
+					g2i[g2im] = y;
+				}
+			}
+			x = 2;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g3im++;
+					g3i[g3im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g3im++;
+					g3i[g3im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g3im++;
+					g3i[g3im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g3im++;
+					g3i[g3im] = y;
+				}
+			}
+			x = 3;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g4im++;
+					g4i[g4im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g4im++;
+					g4i[g4im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g4im++;
+					g4i[g4im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g4im++;
+					g4i[g4im] = y;
+				}
+			}
+			x = 4;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g5im++;
+					g5i[g5im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g5im++;
+					g5i[g5im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g5im++;
+					g5i[g5im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g5im++;
+					g5i[g5im] = y;
+				}
+			}
+			x = 5;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g6im++;
+					g6i[g6im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g6im++;
+					g6i[g6im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g6im++;
+					g6i[g6im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g6im++;
+					g6i[g6im] = y;
+				}
+			}
+			x = 6;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g7im++;
+					g7i[g7im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g7im++;
+					g7i[g7im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g7im++;
+					g7i[g7im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g7im++;
+					g7i[g7im] = y;
+				}
+			}
+			x = 7;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g8im++;
+					g8i[g8im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g8im++;
+					g8i[g8im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g8im++;
+					g8i[g8im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g8im++;
+					g8i[g8im] = y;
+				}
+			}
+			x = 8;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g9im++;
+					g9i[g9im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g9im++;
+					g9i[g9im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g9im++;
+					g9i[g9im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g9im++;
+					g9i[g9im] = y;
+				}
+			}
+			x = 9;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g10im++;
+					g10i[g10im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g10im++;
+					g10i[g10im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g10im++;
+					g10i[g10im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g10im++;
+					g10i[g10im] = y;
+				}
+			}
+			x = 10;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g11im++;
+					g11i[g11im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g11im++;
+					g11i[g11im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g11im++;
+					g11i[g11im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g11im++;
+					g11i[g11im] = y;
+				}
+			}
+			x = 11;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g12im++;
+					g12i[g12im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g12im++;
+					g12i[g12im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g12im++;
+					g12i[g12im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g12im++;
+					g12i[g12im] = y;
+				}
+			}
+			x = 12;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g13im++;
+					g13i[g13im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g13im++;
+					g13i[g13im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g13im++;
+					g13i[g13im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g13im++;
+					g13i[g13im] = y;
+				}
+			}
+			x = 13;
+			for (y = 0; y <= 110; y++) {
+				if (group[x] == ingredients[y].e1) {
+					g14im++;
+					g14i[g14im] = y;
+				}
+				if (group[x] == ingredients[y].e2) {
+					g14im++;
+					g14i[g14im] = y;
+				}
+				if (group[x] == ingredients[y].e3) {
+					g14im++;
+					g14i[g14im] = y;
+				}
+				if (group[x] == ingredients[y].e4) {
+					g14im++;
+					g14i[g14im] = y;
+				}
+			}
+			x = 14;
 		}
-		
-		count = count - 54;
-		
-		sol[];
-		
+
+
+		//Add on the last group in a way that can be recombined
+
+
+
+		//Do the combos d
+
+		int a, b, c, d, e, f, g, h, i, j, k, l, m, n;
+		a = 0;
+
+		int count = -1;
+		string combo[56];
+		struct res {
+			int i1;
+			int i2;
+			int i3;
+			int i4;
+			int i5;
+			int i6;
+			int i7;
+			int i8;
+			int i9;
+			int i10;
+			int i11;
+			int i12;
+			int i13;
+			int i14;
+			int reps;
+		} sol[5], next;
+
+		sol[0].reps = 20;
+		sol[1].reps = 20;
+		sol[2].reps = 20;
+		sol[3].reps = 20;
+		sol[4].reps = 20;
+
+		if (lastgroupm == -1) {
+			/*for (a = 0; a <= g1im; a++){
+				for (b = 0; b <= g2im; b++){
+					do {
+						mark = 1;
+						if (g2i[b] == g1i[a]){
+							b++;
+							mark = 0;
+						}
+					} while (mark == 0);
+					for (c = 0; c <= g3im; c++){
+						do {
+							mark = 1;
+							if (g3i[c] == g1i[a]){
+								c++;
+								mark = 0;
+							}
+							if (g3i[c] == g2i[b]){
+								c++;
+								mark = 0;
+							}
+						} while (mark == 0);
+						for (d = 0; d <= g4im; d++){
+							do {
+								mark = 1;
+								if (g4i[d] == g1i[a]){
+									d++;
+									mark = 0;
+								}
+								if (g4i[d] == g2i[b]){
+									d++;
+									mark = 0;
+								}
+								if (g4i[d] == g3i[c]){
+									d++;
+									mark = 0;
+								}
+							} while (mark == 0);
+							for (e = 0; e <= g5im; e++){
+								do {
+									mark = 1;
+									if (g5i[e] == g1i[a]){
+										e++;
+										mark = 0;
+									}
+									if (g5i[e] == g2i[b]){
+										e++;
+										mark = 0;
+									}
+									if (g5i[e] == g3i[c]){
+										e++;
+										mark = 0;
+									}
+									if (g5i[e] == g4i[d]){
+										e++;
+										mark = 0;
+									}
+								} while (mark == 0);
+			*/
+			int a = 0;
+			int b = 0;
+			int c = 0;
+			int d = 0;
+			int e = 0;
+								for (f = 0; f <= g6im; f++){
+									do {
+										mark = 1;
+										if (g6i[f] == g1i[a]){
+											f++;
+											mark = 0;
+										}
+										if (g6i[f] == g2i[b]){
+											f++;
+											mark = 0;
+										}
+										if (g6i[f] == g3i[c]){
+											f++;
+											mark = 0;
+										}
+										if (g6i[f] == g4i[d]){
+											f++;
+											mark = 0;
+										}
+										if (g6i[f] == g5i[e]){
+											f++;
+											mark = 0;
+										}
+									} while (mark == 0);
+									for (g = 0; g <= g7im; g++){
+										do {
+											mark = 1;
+											if (g7i[g] == g1i[a]){
+												g++;
+												mark = 0;
+											}
+											if (g7i[g] == g2i[b]){
+												g++;
+												mark = 0;
+											}
+											if (g7i[g] == g3i[c]){
+												g++;
+												mark = 0;
+											}
+											if (g7i[g] == g4i[d]){
+												g++;
+												mark = 0;
+											}
+											if (g7i[g] == g5i[e]){
+												g++;
+												mark = 0;
+											}
+											if (g7i[g] == g6i[f]){
+												g++;
+												mark = 0;
+											}
+										} while (mark == 0);
+										for (h = 0; h <= g8im; h++){
+											do {
+												mark = 1;
+												if (g8i[h] == g1i[a]){
+													h++;
+													mark = 0;
+												}
+												if (g8i[h] == g2i[b]){
+													h++;
+													mark = 0;
+												}
+												if (g8i[h] == g3i[c]){
+													h++;
+													mark = 0;
+												}
+												if (g8i[h] == g4i[d]){
+													h++;
+													mark = 0;
+												}
+												if (g8i[h] == g5i[e]){
+													h++;
+													mark = 0;
+												}
+												if (g8i[h] == g6i[f]){
+													h++;
+													mark = 0;
+												}
+												if (g8i[h] == g7i[g]){
+													h++;
+													mark = 0;
+												}
+											} while (mark == 0);
+											for (i = 0; i <= g9im; i++){
+												do {
+													mark = 1;
+													if (g9i[i] == g1i[a]){
+														i++;
+														mark = 0;
+													}
+													if (g9i[i] == g2i[b]){
+														i++;
+														mark = 0;
+													}
+													if (g9i[i] == g3i[c]){
+														i++;
+														mark = 0;
+													}
+													if (g9i[i] == g4i[d]){
+														i++;
+														mark = 0;
+													}
+													if (g9i[i] == g5i[e]){
+														i++;
+														mark = 0;
+													}
+													if (g9i[i] == g6i[f]){
+														i++;
+														mark = 0;
+													}
+													if (g9i[i] == g7i[g]){
+														i++;
+														mark = 0;
+													}
+													if (g9i[i] == g8i[h]){
+														i++;
+														mark = 0;
+													}
+												} while (mark == 0);
+												for (j = 0; j <= g10im; j++){
+													do {
+														mark = 1;
+														if (g10i[j] == g1i[a]){
+															j++;
+															mark = 0;
+														}
+														if (g10i[j] == g2i[b]){
+															j++;
+															mark = 0;
+														}
+														if (g10i[j] == g3i[c]){
+															j++;
+															mark = 0;
+														}
+														if (g10i[j] == g4i[d]){
+															j++;
+															mark = 0;
+														}
+														if (g10i[j] == g5i[e]){
+															j++;
+															mark = 0;
+														}
+														if (g10i[j] == g6i[f]){
+															j++;
+															mark = 0;
+														}
+														if (g10i[j] == g7i[g]){
+															j++;
+															mark = 0;
+														}
+														if (g10i[j] == g8i[h]){
+															j++;
+															mark = 0;
+														}
+														if (g10i[j] == g9i[i]){
+															j++;
+															mark = 0;
+														}
+													} while (mark == 0);
+													for (k = 0; k <= g11im; k++){
+														do {
+															mark = 1;
+															if (g11i[k] == g1i[a]){
+																k++;
+																mark = 0;
+															}
+															if (g11i[k] == g2i[b]){
+																k++;
+																mark = 0;
+															}
+															if (g11i[k] == g3i[c]){
+																k++;
+																mark = 0;
+															}
+															if (g11i[k] == g4i[d]){
+																k++;
+																mark = 0;
+															}
+															if (g11i[k] == g5i[e]){
+																k++;
+																mark = 0;
+															}
+															if (g11i[k] == g6i[f]){
+																k++;
+																mark = 0;
+															}
+															if (g11i[k] == g7i[g]){
+																k++;
+																mark = 0;
+															}
+															if (g11i[k] == g8i[h]){
+																k++;
+																mark = 0;
+															}
+															if (g11i[k] == g9i[i]){
+																k++;
+																mark = 0;
+															}
+															if (g11i[k] == g10i[j]){
+																k++;
+																mark = 0;
+															}
+														} while (mark == 0);
+														for (l = 0; l <= g12im; l++){
+															do {
+																mark = 1;
+																if (g12i[l] == g1i[a]){
+																	l++;
+																	mark = 0;
+																}
+																if (g12i[l] == g2i[b]){
+																	l++;
+																	mark = 0;
+																}
+																if (g12i[l] == g3i[c]){
+																	l++;
+																	mark = 0;
+																}
+																if (g12i[l] == g4i[d]){
+																	l++;
+																	mark = 0;
+																}
+																if (g12i[l] == g5i[e]){
+																	l++;
+																	mark = 0;
+																}
+																if (g12i[l] == g6i[f]){
+																	l++;
+																	mark = 0;
+																}
+																if (g12i[l] == g7i[g]){
+																	l++;
+																	mark = 0;
+																}
+																if (g12i[l] == g8i[h]){
+																	l++;
+																	mark = 0;
+																}
+																if (g12i[l] == g9i[i]){
+																	l++;
+																	mark = 0;
+																}
+																if (g12i[l] == g10i[j]){
+																	l++;
+																	mark = 0;
+																}
+																if (g12i[l] == g11i[k]){
+																	l++;
+																	mark = 0;
+																}
+															} while (mark == 0);
+															for (m = 0; m <= g13im; m++){
+																do {
+																	mark = 1;
+																	if (g13i[m] == g1i[a]){
+																		m++;
+																		mark = 0;
+																	}
+																	if (g13i[m] == g2i[b]){
+																		m++;
+																		mark = 0;
+																	}
+																	if (g13i[m] == g3i[c]){
+																		m++;
+																		mark = 0;
+																	}
+																	if (g13i[m] == g4i[d]){
+																		m++;
+																		mark = 0;
+																	}
+																	if (g13i[m] == g5i[e]){
+																		m++;
+																		mark = 0;
+																	}
+																	if (g13i[m] == g6i[f]){
+																		m++;
+																		mark = 0;
+																	}
+																	if (g13i[m] == g7i[g]){
+																		m++;
+																		mark = 0;
+																	}
+																	if (g13i[m] == g8i[h]){
+																		m++;
+																		mark = 0;
+																	}
+																	if (g13i[m] == g9i[i]){
+																		m++;
+																		mark = 0;
+																	}
+																	if (g13i[m] == g10i[j]){
+																		m++;
+																		mark = 0;
+																	}
+																	if (g13i[m] == g11i[k]){
+																		m++;
+																		mark = 0;
+																	}
+																	if (g13i[m] == g12i[l]){
+																		m++;
+																		mark = 0;
+																	}
+																} while (mark == 0);
+																for (n = 0; n <= g14im; n++){
+																	do {
+																		mark = 1;
+																		if (g14i[n] == g1i[a]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g2i[b]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g3i[c]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g4i[d]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g5i[e]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g6i[f]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g7i[g]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g8i[h]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g9i[i]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g10i[j]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g11i[k]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g12i[l]){
+																			n++;
+																			mark = 0;
+																		}
+																		if (g14i[n] == g13i[m]){
+																			n++;
+																			mark = 0;
+																		}
+																	} while (mark == 0);
+																	combo[0] = ingredients[g1i[a]].e1;
+																	//cout << combo[0];
+																	combo[1] = ingredients[g1i[a]].e2;
+																	//cout << combo[1];
+																	combo[2] = ingredients[g1i[a]].e3;
+																	//cout << combo[2];
+																	combo[3] = ingredients[g1i[a]].e4;
+																	//cout << combo[3];
+																	combo[4] = ingredients[g2i[b]].e1;
+																	combo[5] = ingredients[g2i[b]].e2;
+																	combo[6] = ingredients[g2i[b]].e3;
+																	combo[7] = ingredients[g2i[b]].e4;
+																	combo[8] = ingredients[g3i[c]].e1;
+																	combo[9] = ingredients[g3i[c]].e2;
+																	combo[10] = ingredients[g3i[c]].e3;
+																	combo[11] = ingredients[g3i[c]].e4;
+																	combo[12] = ingredients[g4i[d]].e1;
+																	combo[13] = ingredients[g4i[d]].e2;
+																	combo[14] = ingredients[g4i[d]].e3;
+																	combo[15] = ingredients[g4i[d]].e4;
+																	combo[16] = ingredients[g5i[e]].e1;
+																	combo[17] = ingredients[g5i[e]].e2;
+																	combo[18] = ingredients[g5i[e]].e3;
+																	combo[19] = ingredients[g5i[e]].e4;
+																	combo[20] = ingredients[g6i[f]].e1;
+																	combo[21] = ingredients[g6i[f]].e2;
+																	combo[22] = ingredients[g6i[f]].e3;
+																	combo[23] = ingredients[g6i[f]].e4;
+																	combo[24] = ingredients[g7i[g]].e1;
+																	combo[25] = ingredients[g7i[g]].e2;
+																	combo[26] = ingredients[g7i[g]].e3;
+																	combo[27] = ingredients[g7i[g]].e4;
+																	combo[28] = ingredients[g8i[h]].e1;
+																	combo[29] = ingredients[g8i[h]].e2;
+																	combo[30] = ingredients[g8i[h]].e3;
+																	combo[31] = ingredients[g8i[h]].e4;
+																	combo[32] = ingredients[g9i[i]].e1;
+																	combo[33] = ingredients[g9i[i]].e2;
+																	combo[34] = ingredients[g9i[i]].e3;
+																	combo[35] = ingredients[g9i[i]].e4;
+																	combo[36] = ingredients[g10i[j]].e1;
+																	combo[37] = ingredients[g10i[j]].e2;
+																	combo[38] = ingredients[g10i[j]].e3;
+																	combo[39] = ingredients[g10i[j]].e4;
+																	combo[40] = ingredients[g11i[k]].e1;
+																	combo[41] = ingredients[g11i[k]].e2;
+																	combo[42] = ingredients[g11i[k]].e3;
+																	combo[43] = ingredients[g11i[k]].e4;
+																	combo[44] = ingredients[g12i[l]].e1;
+																	combo[45] = ingredients[g12i[l]].e2;
+																	combo[46] = ingredients[g12i[l]].e3;
+																	combo[47] = ingredients[g12i[l]].e4;
+																	combo[48] = ingredients[g13i[m]].e1;
+																	combo[49] = ingredients[g13i[m]].e2;
+																	combo[50] = ingredients[g13i[m]].e3;
+																	combo[51] = ingredients[g13i[m]].e4;
+																	combo[52] = ingredients[g14i[n]].e1;
+																	combo[53] = ingredients[g14i[n]].e2;
+																	combo[54] = ingredients[g14i[n]].e3;
+																	combo[55] = ingredients[g14i[n]].e4;
+																	for (x = 0, count = 0; x <= 54; x++){
+																		for (y = 0; y <= 55; y++){
+																			if (effects[x] == combo[y]) {
+																				count++;
+																			}
+																		}
+																	}
+
+																	count = count - 54;
+
+																	//Assign combo to a res data structure and compare it with the top 5
+																	next.i1 = a;
+																	next.i2 = b;
+																	next.i3 = c;
+																	next.i4 = d;
+																	next.i5 = e;
+																	next.i6 = f;
+																	next.i7 = g;
+																	next.i8 = h;
+																	next.i9 = i;
+																	next.i10 = j;
+																	next.i11 = k;
+																	next.i12 = l;
+																	next.i13 = m;
+																	next.i14 = n;
+																	next.reps = count;
+
+
+
+																	bool mark;
+
+																	do
+																	{
+																		mark = 0;
+																		for (int top = 0; top <= 4; top++)
+																		{
+																			if (sol[4].reps > next.reps) {
+																				swap(sol[4], next);
+																				if (sol[top].reps > sol[top + 1].reps)
+																				{
+																					swap(sol[top], sol[top + 1]);
+																					mark = 1;
+																				}
+																			}
+
+																		}
+																	} while (mark == 1);
+
+																}
+																//cout << "\nCurrent m: " << m << "\n";
+															}
+															//cout << "\nCurrent l: " << l << "\n";
+														}
+														//cout << "\nCurrent k: " << k << "\n";
+													}
+													//cout << "\nCurrent j: " << j << "\n";
+												}
+												//cout << "\nCurrent i: " << i << "\n";
+											}
+											//cout << "\nCurrent h: " << h << "\n";
+										}
+										cout << "\nCurrent g: " << g << "\n";
+									}
+									cout << "\nCurrent f: " << f << "\n";
+								}
+								cout << "\nCurrent e: " << e << "\n";
+		/*					}
+							cout << "\nCurrent d: " << d << "\n";
+						}
+						cout << "\nCurrent c: " << c << "\n";
+					}
+					cout << "\nCurrent b: " << b << "\n";
+				}
+				cout << "\nCurrent a: " << a << "\n";
+			}
+*/
 		}
+		for (x = 0; x <= 4; x++) {
+			cout << "\n" << x + 1 << ". Count: " << sol[x].reps;
+			cout << "\n" << x + 1 << ". Ingredients: " << sol[x].i1 << sol[x].i2 << sol[x].i3 << sol[x].i4 << sol[x].i5 << sol[x].i6 << sol[x].i7 << sol[x].i8 << sol[x].i9 << sol[x].i10 << sol[x].i11 << sol[x].i12 << sol[x].i13 << sol[x].i14;
 		}
-		}
-		}
-		}
-		}
-		}
-		}
-		}
-		}
-		}
-		}
-		}
-		cout << a;
-		}
-		}
-		
 		
 		
 		int ol = 0;
 		string olarr[50];
 
+		/*for (x = 0; x <= 27; x++){
+			cout << ingredients[i4[x]].name;
+		}
 		for (x = 0; x <= 34; x++){
-			for (y = 0; y <= 34; y++){
+			cout << ingredients[i4[x]].name;
+		}
+		*/
+
+		/*for (x = 0; x <= 27; x++){
+			for (y = 0; y <= 27; y++){
 				if (i4[x] == i4[y] && x != y){
 					olarr[ol] = ingredients[i4[y]].name;
 					cout << "\nDouble4: " << olarr[ol];
@@ -872,19 +1296,15 @@ int main(){
 			for (y = 0; y <= 34; y++){
 				if (i4[x] == i5[y]) {
 					olarr[ol] = ingredients[i5[y]].name;
-					cout << "\nDouble: " << olarr[ol];
+					cout << "\nDouble45: " << olarr[ol];
 					ol++;
 				}
 			}
 		}
 
 
-
-
-
-
 		cout << "\nOverlap: " << ol;
-
+		*/
 
 
 		//for (z = 0; z <= r4 - 1; z++){
@@ -915,8 +1335,6 @@ int main(){
 		//HERE, CREATE COMBINATIONS AND COUNT REPEATS
 		unsigned int a, b, c, d, e, f, g, h, i, j, k, l, m, n;
 		a = 0;
-		
-		
 
 
 
@@ -1029,6 +1447,7 @@ int main(){
 		*/
 	}
 	else cout << "Can't open the file. Why the heck would it do that?";
+	
 
 	return 0;
 }

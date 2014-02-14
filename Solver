@@ -1215,10 +1215,40 @@ int main(){
 																		for (int top = 0; top <= 4; top++)
 																		{
 																			if (sol[4].reps > next.reps) {
-																				swap(sol[4], next);
+																				swap(sol[4].i1, next.i1);
+																				swap(sol[4].i2, next.i2);
+																				swap(sol[4].i3, next.i3);
+																				swap(sol[4].i4, next.i4);
+																				swap(sol[4].i5, next.i5);
+																				swap(sol[4].i6, next.i6);
+																				swap(sol[4].i7, next.i7);
+																				swap(sol[4].i8, next.i8);
+																				swap(sol[4].i9, next.i9);
+																				swap(sol[4].i10, next.i10);
+																				swap(sol[4].i11, next.i11);
+																				swap(sol[4].i12, next.i12);
+																				swap(sol[4].i12, next.i12);
+																				swap(sol[4].i13, next.i13);
+																				swap(sol[4].i14, next.i14);
+																				swap(sol[4].reps, next.reps);
 																				if (sol[top].reps > sol[top + 1].reps)
 																				{
-																					swap(sol[top], sol[top + 1]);
+																					swap(sol[top].i1, sol[top + 1].i1);
+																					swap(sol[top].i2, sol[top + 1].i2);
+																					swap(sol[top].i3, sol[top + 1].i3);
+																					swap(sol[top].i4, sol[top + 1].i4);
+																					swap(sol[top].i5, sol[top + 1].i5);
+																					swap(sol[top].i6, sol[top + 1].i6);
+																					swap(sol[top].i7, sol[top + 1].i7);
+																					swap(sol[top].i8, sol[top + 1].i8);
+																					swap(sol[top].i9, sol[top + 1].i9);
+																					swap(sol[top].i10, sol[top + 1].i10);
+																					swap(sol[top].i11, sol[top + 1].i11);
+																					swap(sol[top].i12, sol[top + 1].i12);
+																					swap(sol[top].i12, sol[top + 1].i12);
+																					swap(sol[top].i13, sol[top + 1].i13);
+																					swap(sol[top].i14, sol[top + 1].i14);
+																					swap(sol[top].reps, sol[top + 1].reps);
 																					mark = 1;
 																				}
 																			}
